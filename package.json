@@ -1,0 +1,31 @@
+{
+  "name": "@danfebooks/nepalpit",
+  "version": "0.1.0",
+  "description": "Personal Income Tax (PIT) calculator utility for Nepal",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danfebooks/nepalpit.git"
+  },
+  "keywords": [
+    "nepal",
+    "tax",
+    "income",
+    "tax",
+    "danfebooks",
+    "taxation",
+    "payroll",
+    "finance",
+    "pit",
+    "nepalpit"
+  ],
+  "author": "DanfeBooks Engineering Team <engineering@danfebooks.com> (https://www.danfebooks.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/danfebooks/nepalpit/issues"
+  },
+  "homepage": "https://www.danfebooks.com/calculators/personal-income-tax"
+}

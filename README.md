@@ -1,3 +1,3 @@
 # Nepal PIT
 
-Calculator for Nepal Personal Income Tax
+Personal Income Tax (PIT) calculator utility for Nepal
