@@ -8,13 +8,14 @@
  * MIT License
  * Copyright (c) 2020 danfebooks™
  *
- * Index.js
+ * Tax Breakdown
+ * This is the metadata for tax brackets in Nepal with FY fyStartDate and fyEndDateDate
  */
 
-import { breakdown } from './breakdown';
+import { data } from './data';
 
-const tax = () => {
-	return breakdown();
+const breakdown = () => {
+	return JSON.parse(data);
 };
 
-export { tax };
+export { breakdown };

@@ -16,7 +16,8 @@
     "parserOptions": {
         "ecmaVersion": 11,
         "sourceType": "module"
-    },
+	},
+	"ignorePatterns": ["**/dist/**", "**/lib/**", "**/module/**", "**/docs/**"],
     "rules": {
         "prettier/prettier": ["error"]
     }
