@@ -105,8 +105,11 @@ dist
 
 ## source code
 src/
-.babelrc
+example/
+tests/
 .editorconfig
 .eslintrc.json
 .gitigore
 .prettierrc
+babel.config.json
+webpack.config.js

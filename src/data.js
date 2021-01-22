@@ -2,11 +2,11 @@
  *
  * @danfebooks/nepalpit
  * Personal Income Tax (PIT) calculator utility for Nepal
- * https://www.danfebooks.com/calculators/personal-income-tax
+ * https://www.danfebooks.com/en/calculators/nepal-personal-income-tax
  *
  *
  * MIT License
- * Copyright (c) 2020 danfebooks™
+ * Copyright (c) 2020 - 2021 DanfeBooks®
  *
  * Data
  * Tax Slab Data
