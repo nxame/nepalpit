@@ -17,10 +17,8 @@ const tax = (year) => {
 	const data = breakdown(year);
 
 	return data;
-}
+};
 
-const meta = () => {
-
-}
+const meta = () => {};
 
 export { tax, meta };
