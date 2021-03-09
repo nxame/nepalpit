@@ -13,6 +13,14 @@
 
 import { breakdown } from './breakdown.js';
 
-const tax = () => breakdown();
+const tax = (year) => {
+	const data = breakdown(year);
 
-export { tax };
+	return data;
+}
+
+const meta = () => {
+
+}
+
+export { tax, meta };

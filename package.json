@@ -33,7 +33,7 @@
   "scripts": {
     "test": "Echo 'test'",
     "clean": "rimraf ./lib/**",
-    "dev": "webpack -w --progress --mode='development' --devtool='inline-source-map' --env outputPath='example'",
+    "dev": "webpack -w --mode='development' --devtool='inline-source-map' --env outputPath='example'",
     "build": "npm run test && npm run clean && webpack --progress --mode='production' --env outputPath='lib'",
     "prettify": "prettier --write ./src",
     "lint": "eslint ./src --fix",

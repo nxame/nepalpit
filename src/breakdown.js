@@ -14,8 +14,11 @@
 
 import { data } from './data.js';
 
-const breakdown = () => {
-	return JSON.parse(data);
+const breakdown = year => {
+	const allBrackets = JSON.parse(data);
+	const brackets = allBrackets[year];
+
+	return brackets;
 };
 
 export { breakdown };
