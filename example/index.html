@@ -8,7 +8,15 @@
 <body>
 	<script src="../danfebooks.pit.js"></script>
 	<script>
-		console.dir(danfebooks.tax('2077/78'))
+		var options = {
+			year: '2077/78', // string
+			single: true, // boolean
+			income: 700000, // number
+			months: 12, // number
+			deductions: 100000, // number
+		};
+		console.dir(danfebooks.tax(options))
+		console.dir(danfebooks.meta())
 		// console.table(danfebooks.tax('2077/78'))
 	</script>
 </body>

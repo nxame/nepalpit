@@ -13,12 +13,20 @@
 
 import { breakdown } from './breakdown.js';
 
-const tax = (year) => {
-	const data = breakdown(year);
+const tax = (options) => {
+	const meta = breakdown(options.year);
 
-	return data;
+	console.log('Given year is', options.year);
+
+	const result = {
+		slab: [],
+	};
+
+	return meta;
 };
 
-const meta = () => {};
+const meta = () => {
+	return 'meta work in porogress';
+};
 
 export { tax, meta };
