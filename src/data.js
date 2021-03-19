@@ -18,14 +18,55 @@ const obj = {
 		fyStartDateNe: 'Shrawan 1, 2070',
 		fyEndDate: 'July 16, 2014',
 		fyEndDateNe: 'Ashad 32, 2071',
-		brackets: [
-			{
-				single: [{ 200000: 1 }, { 100000: 2 }, { 0: 3 }],
-			},
-			{
-				married: [{ 250000: 1 }, { 100000: 2 }],
-			},
-		],
+		MaxAnnualEPFRate: 0.2,
+		MaxAnnualDeductionRate: 0.33,
+		MaxAnnualDeductionAmount: 300000,
+		brackets: {
+			single: [
+				{
+					start: 0.0,
+					end: 400000.0,
+					rate: 0.01,
+				},
+				{
+					start: 400000.0,
+					end: 500000.0,
+					rate: 0.1,
+				},
+				{
+					start: 500000.0,
+					end: 700000.0,
+					rate: 0.2,
+				},
+				{
+					start: 700000.0,
+					end: 2000000.0,
+					rate: 0.3,
+				},
+			],
+			married: [
+				{
+					start: 0.0,
+					end: 450000.0,
+					rate: 0.01,
+				},
+				{
+					start: 450000.0,
+					end: 550000.0,
+					rate: 0.1,
+				},
+				{
+					start: 550000.0,
+					end: 750000.0,
+					rate: 0.2,
+				},
+				{
+					start: 750000.0,
+					end: 2000000.0,
+					rate: 0.3,
+				},
+			],
+		},
 	},
 	'2071/72': {
 		fyStartDate: 'July 17, 2014',
@@ -112,28 +153,59 @@ const obj = {
 		],
 	},
 	'2077/78': {
-		fyStartDate: 'July 16, 2020',
-		fyStartDateNe: 'Shrawan 1, 2077',
-		fyEndDate: 'July 15, 2021',
-		fyEndDateNe: 'Asadh 31, 2078',
-		brackets: [
-			{
-				single: [
-					{ 400000: 1 },
-					{ 100000: 10 },
-					{ 200000: 20 },
-					{ 1300000: 30 },
-				],
-			},
-			{
-				married: [
-					{ 450000: 1 },
-					{ 100000: 10 },
-					{ 200000: 20 },
-					{ 1250000: 30 },
-				],
-			},
-		],
+		fyStartDate: 'July 16, 2013',
+		fyStartDateNe: 'Shrawan 1, 2070',
+		fyEndDate: 'July 16, 2014',
+		fyEndDateNe: 'Ashad 32, 2071',
+		MaxAnnualEPFRate: 0.2,
+		MaxAnnualDeductionRate: 0.33,
+		MaxAnnualDeductionAmount: 300000,
+		brackets: {
+			single: [
+				{
+					start: 0.0,
+					end: 400000.0,
+					rate: 0.01,
+				},
+				{
+					start: 400000.0,
+					end: 500000.0,
+					rate: 0.1,
+				},
+				{
+					start: 500000.0,
+					end: 700000.0,
+					rate: 0.2,
+				},
+				{
+					start: 700000.0,
+					end: 2000000.0,
+					rate: 0.3,
+				},
+			],
+			married: [
+				{
+					start: 0.0,
+					end: 450000.0,
+					rate: 0.01,
+				},
+				{
+					start: 450000.0,
+					end: 550000.0,
+					rate: 0.1,
+				},
+				{
+					start: 550000.0,
+					end: 750000.0,
+					rate: 0.2,
+				},
+				{
+					start: 750000.0,
+					end: 2000000.0,
+					rate: 0.3,
+				},
+			],
+		},
 	},
 	'2078/79': {
 		fyStartDate: 'July 16, 2021',
