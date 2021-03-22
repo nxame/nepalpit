@@ -12,11 +12,14 @@
  */
 
 import { breakdown } from './breakdown.js';
-import { getTotalTaxableAmount } from './calculator';
+import {
+	getTotalTaxableAmount,
+	getTotalTaxAmountWithBrackets,
+} from './calculator';
 
 const tax = (options) => {
-	const meta = breakdown(options.year);
-	const { income, epf, cit, otherDeduction, year } = options;
+	const { income, epf, cit, otherDeduction, year, single } = options;
+	const meta = breakdown(year);
 	console.log('Given year is', year);
 	const taxableAmount = getTotalTaxableAmount(
 		income,
@@ -26,6 +29,13 @@ const tax = (options) => {
 		meta,
 	);
 	console.log(taxableAmount, 'taxable Amount');
+	const maritalStatus = single ? 'single' : 'married';
+	const totalTaxAmountWithBrackets = getTotalTaxAmountWithBrackets(
+		meta.brackets[maritalStatus],
+		taxableAmount,
+	);
+
+	console.log(totalTaxAmountWithBrackets, 'calculated tax amount with rate');
 	const result = {};
 
 	return result;

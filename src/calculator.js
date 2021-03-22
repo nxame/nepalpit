@@ -53,4 +53,59 @@ const getTotalTaxableAmount = (
 		return totalIncome - MaxAnnualDeductionAmount;
 };
 
-export { getTotalTaxableAmount };
+/**
+ * Returns the total tax for tax band
+ *
+ * @param taxRate tax rate from selected tax data
+ * @param totalTaxableIncome total income (can be carry left over from last bracket)
+ */
+
+const getTotalTaxForRateWithIncome = (taxRate, totalTaxableIncome) => {
+	const incomeTaxRateDifference = taxRate.end - taxRate.start;
+	const totalMinusDifference = totalTaxableIncome - incomeTaxRateDifference;
+	const carry = totalMinusDifference > 0 ? totalMinusDifference : 0;
+
+	if (totalTaxableIncome > 0) {
+		if (totalTaxableIncome >= incomeTaxRateDifference) {
+			return {
+				taxLiability: incomeTaxRateDifference * taxRate.rate,
+				taxRate: taxRate.rate,
+				assesibleIncome: incomeTaxRateDifference,
+				carry,
+			};
+		}
+		return {
+			taxLiability: totalTaxableIncome * taxRate.rate,
+			taxRate: taxRate.rate,
+			assesibleIncome: totalTaxableIncome,
+			carry,
+		};
+	}
+
+	return {
+		taxLiability: 0,
+		taxRate: taxRate.rate,
+		assesibleIncome: 0,
+		carry: carry,
+	};
+};
+
+/**
+ * Returns a all tax breakdown of income.
+ * @param taxBrackets from selected tax data
+ * @param totalTaxableAmount total calculated taxable amount
+ */
+
+function getTotalTaxAmountWithBrackets(taxBrackets, totalTaxableAmount) {
+	let taxBreakDownArray = [];
+	return taxBrackets.map((item, index) => {
+		const result = getTotalTaxForRateWithIncome(
+			item,
+			index === 0 ? totalTaxableAmount : taxBreakDownArray[index - 1].carry,
+		);
+		taxBreakDownArray.push(result);
+		return result;
+	});
+}
+
+export { getTotalTaxableAmount, getTotalTaxAmountWithBrackets };
