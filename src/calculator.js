@@ -108,4 +108,17 @@ function getTotalTaxAmountWithBrackets(taxBrackets, totalTaxableAmount) {
 	});
 }
 
-export { getTotalTaxableAmount, getTotalTaxAmountWithBrackets };
+/**
+ * Returns two decimal number converted from original input float number
+ *
+ * @param amount floating number
+ */
+
+const getAmountRounded = (amount) => {
+	return Math.round(amount * 100) / 100;
+};
+export {
+	getTotalTaxableAmount,
+	getTotalTaxAmountWithBrackets,
+	getAmountRounded,
+};

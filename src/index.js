@@ -15,6 +15,7 @@ import { breakdown } from './breakdown.js';
 import {
 	getTotalTaxableAmount,
 	getTotalTaxAmountWithBrackets,
+	getAmountRounded,
 } from './calculator';
 
 const tax = (options) => {
@@ -28,15 +29,41 @@ const tax = (options) => {
 		otherDeduction,
 		meta,
 	);
-	console.log(taxableAmount, 'taxable Amount');
 	const maritalStatus = single ? 'single' : 'married';
 	const totalTaxAmountWithBrackets = getTotalTaxAmountWithBrackets(
 		meta.brackets[maritalStatus],
 		taxableAmount,
 	);
 
-	console.log(totalTaxAmountWithBrackets, 'calculated tax amount with rate');
-	const result = {};
+	const result = {
+		sumOfEpfAndCit: epf + cit,
+		totalIncome: income,
+		totalDeduction: income - taxableAmount,
+		netAssessable: taxableAmount,
+		totalTaxWithBrackets: totalTaxAmountWithBrackets
+			.filter((item) => item.assesibleIncome > 0)
+			.map((item) => {
+				const taxObj = {};
+				taxObj.assesibleIncome = item.assesibleIncome;
+				taxObj.rate = item.taxRate * 100;
+				taxObj.taxLiability = item.taxLiability;
+				return taxObj;
+			}),
+		totalAssesibleIncome: totalTaxAmountWithBrackets.reduce(
+			(initialValue, value) => initialValue + value.assesibleIncome,
+			0,
+		),
+		totalTaxLiability: totalTaxAmountWithBrackets.reduce(
+			(initialValue, value) => initialValue + value.taxLiability,
+			0,
+		),
+		netTaxLiabilityMonthly: getAmountRounded(
+			totalTaxAmountWithBrackets.reduce(
+				(initialValue, value) => initialValue + value.taxLiability,
+				0,
+			) / 12,
+		),
+	};
 
 	return result;
 };
