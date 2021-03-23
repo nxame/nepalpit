@@ -18,9 +18,9 @@ const obj = {
 		fyStartDateNe: 'Shrawan 1, 2070',
 		fyEndDate: 'July 16, 2014',
 		fyEndDateNe: 'Ashad 32, 2071',
-		MaxAnnualEPFRate: 0.2,
-		MaxAnnualDeductionRate: 0.33,
-		MaxAnnualDeductionAmount: 300000,
+		maxEPFRate: 0.2,
+		maxDeductionRate: 0.33,
+		maxDeductionLimit: 300000,
 		brackets: {
 			single: [
 				{
@@ -157,9 +157,9 @@ const obj = {
 		fyStartDateNe: 'Shrawan 1, 2070',
 		fyEndDate: 'July 16, 2014',
 		fyEndDateNe: 'Ashad 32, 2071',
-		MaxAnnualEPFRate: 0.2,
-		MaxAnnualDeductionRate: 0.33,
-		MaxAnnualDeductionAmount: 300000,
+		maxEPFRate: 0.2,
+		maxDeductionRate: 0.33,
+		maxDeductionLimit: 300000,
 		brackets: {
 			single: [
 				{

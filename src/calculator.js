@@ -25,34 +25,40 @@ const getTotalTaxableAmount = (
 	otherDeduction,
 	taxSettings,
 ) => {
-	const {
-		MaxAnnualDeductionRate,
-		MaxAnnualDeductionAmount,
-		MaxAnnualEPFRate,
-	} = taxSettings;
+	const { maxDeductionRate, maxDeductionLimit, maxEPFRate } = taxSettings;
+	const totalDeduction = epf + cit + otherDeduction;
+	const maxDeductableAmount = totalIncome * maxDeductionRate; // 33% of income
+	let actualDeduction = 0;
 
-	if (epf > totalIncome * MaxAnnualEPFRate) {
+	if (epf > totalIncome * maxEPFRate) {
 		throw new Error('The EPF must be smaller than 20% of salary');
 	}
-
-	const totalDeduction = epf + cit + otherDeduction;
-	const EmployeeAnnualDeductionAmount = totalIncome * MaxAnnualDeductionRate;
-
-	if (totalDeduction <= EmployeeAnnualDeductionAmount) {
-		return totalIncome - totalDeduction;
-	}
-
-	if (EmployeeAnnualDeductionAmount <= MaxAnnualDeductionAmount) {
-		return totalIncome - EmployeeAnnualDeductionAmount;
-	}
-
+	// if the given deduction is greater than 33 % if income (maxDeductableAmount) and also greater than 3 lakh (maxDeductionLimit)
 	if (
-		EmployeeAnnualDeductionAmount > MaxAnnualDeductionAmount &&
-		totalDeduction <= MaxAnnualDeductionAmount
-	)
-		return totalIncome - MaxAnnualDeductionAmount;
-};
+		totalDeduction > maxDeductableAmount &&
+		totalDeduction > maxDeductionLimit
+	) {
+		actualDeduction = maxDeductableAmount;
+	} else if (
+		//if the given deduction is less than 33 % (maxDeductableAmount) of income and also less than 3 lakh(maxDeductionLimit)
+		totalDeduction <= maxDeductableAmount &&
+		totalDeduction <= maxDeductionLimit
+	) {
+		actualDeduction = totalDeduction;
+	} else if (
+		//if the given deduction is less than 33 % (maxDeductableAmount) of income and greater than 3 lakh(maxDeductionLimit)
+		totalDeduction <= maxDeductableAmount &&
+		totalDeduction >= maxDeductionLimit
+	) {
+		actualDeduction = maxDeductionLimit;
+	}
+	//if the given deduction is greater than 33 % of income (maxDeductableAmount) and less than 3 lakh (maxDeductionLimit)
+	else {
+		actualDeduction = maxDeductableAmount;
+	}
 
+	return totalIncome - actualDeduction;
+};
 /**
  * Returns the total tax for tax band
  *
@@ -117,6 +123,7 @@ function getTotalTaxAmountWithBrackets(taxBrackets, totalTaxableAmount) {
 const getAmountRounded = (amount) => {
 	return Math.round(amount * 100) / 100;
 };
+
 export {
 	getTotalTaxableAmount,
 	getTotalTaxAmountWithBrackets,
