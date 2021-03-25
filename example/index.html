@@ -8,15 +8,51 @@
 <body>
 	<script src="../danfebooks.pit.js"></script>
 	<script>
+		// less than 33 % and less than limit i.e 3 lakh
 		var options = {
 			year: '2077/78', // string
 			single: true, // boolean
-			income: 700000, // number
+			income: 812500, // number
 			months: 12, // number
-			deductions: 100000, // number
+			epf:0, //number
+			cit:100000, //number 264000
+			otherDeduction:0, //number 
+		};
+		// less than 33 % and greater than limit i.e 3 lakh
+		var options2 = {
+			year: '2077/78', // string
+			single: true, // boolean
+			income: 1800000, // number
+			months: 12, // number
+			epf:0, //number
+			cit:400000, //number 
+			otherDeduction:0, //number
+		};
+			// greater than 33 % and also greater than limit i.e 3 lakh
+		var options3 = {
+			year: '2077/78', // string
+			single: true, // boolean
+			income: 812500, // number
+			months: 12, // number
+			epf:0, //number
+			cit:400000, //number 
+			otherDeduction:0, //number
+		};
+		// greater than 33 % and less than limit i.e 3 lakh
+		var options4 = {
+			year: '2077/78', // string
+			single: true, // boolean
+			income: 280000, // number
+			months: 12, // number
+			epf:0, //number
+			cit:100000, //number 
+			otherDeduction:0, //number
 		};
 		console.dir(danfebooks.tax(options))
-		console.dir(danfebooks.meta())
+		console.dir(danfebooks.tax(options2))
+		console.dir(danfebooks.tax(options3))
+		console.dir(danfebooks.tax(options4))
+		//console.dir(danfebooks.meta())
 		// console.table(danfebooks.tax('2077/78'))
 	</script>
 </body>
