@@ -14,9 +14,11 @@
 /**
  * Returns the total taxable totalIncome
  *
- * @param taxSettings from slected tax data
- * @param totalDecuction total dedcution amount
  * @param totalIncome total income
+ * @param epf epf amount
+ * @param cit cit amount
+ * @param otherDeduction otherDeduction amount
+ * @param taxSettings from slected tax data
  */
 const getTotalTaxableAmount = (
 	totalIncome,
@@ -60,7 +62,7 @@ const getTotalTaxableAmount = (
 	return totalIncome - actualDeduction;
 };
 /**
- * Returns the total tax for tax band
+ * Returns the total tax with tax brackets
  *
  * @param taxRate tax rate from selected tax data
  * @param totalTaxableIncome total income (can be carry left over from last bracket)
