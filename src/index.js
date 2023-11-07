@@ -22,14 +22,11 @@ const tax = (options) => {
 	const { income, epf, cit, ssf, insurance, year, single } = options;
 	const meta = breakdown(year);
 	console.log('Given year is', year);
-	const taxableAmount = getTotalTaxableAmount(
-		income,
-		epf,
-		cit,
-		ssf,
-		insurance,
-		meta,
-	);
+	const {
+		taxableIncome,
+		sumOfSsfEpfAndCit,
+		finalInsurance,
+	} = getTotalTaxableAmount(income, epf, cit, ssf, insurance, meta);
 	const maritalStatus = single ? 'single' : 'married';
 	const totalTaxAmountWithBrackets = getTotalTaxAmountWithBrackets(
 		meta.brackets[maritalStatus],
@@ -54,20 +51,26 @@ const tax = (options) => {
 				taxObj.taxLiability = format(item.taxLiability);
 				return taxObj;
 			}),
-		totalAssesibleIncome: format(totalTaxAmountWithBrackets.reduce(
-			(initialValue, value) => initialValue + value.assesibleIncome,
-			0,
-		)),
-		totalTaxLiability: format(totalTaxAmountWithBrackets.reduce(
-			(initialValue, value) => initialValue + value.taxLiability,
-			0,
-		)),
-		netTaxLiabilityMonthly: format(getAmountRounded(
+		totalAssesibleIncome: format(
+			totalTaxAmountWithBrackets.reduce(
+				(initialValue, value) => initialValue + value.assesibleIncome,
+				0,
+			),
+		),
+		totalTaxLiability: format(
 			totalTaxAmountWithBrackets.reduce(
 				(initialValue, value) => initialValue + value.taxLiability,
 				0,
-			) / 12,
-		)),
+			),
+		),
+		netTaxLiabilityMonthly: format(
+			getAmountRounded(
+				totalTaxAmountWithBrackets.reduce(
+					(initialValue, value) => initialValue + value.taxLiability,
+					0,
+				) / 12,
+			),
+		),
 	};
 
 	return result;
