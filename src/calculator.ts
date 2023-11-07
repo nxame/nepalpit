@@ -8,28 +8,50 @@
  * MIT License
  * Copyright (c) 2020 - 2021 DanfeBooks®
  *
- * calculator.js
+ * calculator.ts
  */
 
-/**
- * Returns the total taxable totalIncome along with Insurance and Sum of SSF, EPF, and CIT 
- *
- * @param totalIncome total income
- * @param epf epf amount
- * @param cit cit amount
- * @param ssf ssf amount
- * @param insurance insurance amount
- * @param taxSettings from slected tax data
- * 
- */
-const getTotalTaxableAmount = (
+interface TotalTaxableAmountResult {
+	taxableIncome: number;
+	sumOfSsfEpfAndCit: number;
+	finalInsurance: number;
+}
+
+interface TaxRate {
+	start: number;
+	end: number;
+	rate: number;
+}
+
+interface TotalTaxForRateWithIncomeResult {
+	taxLiability: number;
+	taxRate: number;
+	assessibleIncome: number;
+	carry: number;
+}
+
+interface TotalTaxableAmountParams {
+	totalIncome: number;
+	epf: number;
+	cit: number;
+	ssf: number;
+	insurance: number;
+	taxSettings: {
+		maxDeductionRate: number;
+		maxDeductionLimit: number;
+		maxDeductionLimitWithSSF?: number;
+		maxInsuranceDeductionLimit?: number;
+	};
+}
+
+const getTotalTaxableAmount = ({
 	totalIncome,
 	epf,
 	cit,
 	ssf,
 	insurance,
 	taxSettings,
-) => {
+}: TotalTaxableAmountParams): TotalTaxableAmountResult => {
 	const {
 		maxDeductionRate,
 		maxDeductionLimit,
@@ -42,17 +64,19 @@ const getTotalTaxableAmount = (
 	let actualDeduction = 0;
 	let deductionThreshold = 0;
 
-	// if totalDeduction consits of SSF
-	if (ssf > 0) {
-		// defining deductionThreshold comparing mexDeductionLimitWithSSF (5 lakhs) and maxDeducatableAmount (33%) whichever is lower
-		deductionThreshold = maxDeductionLimitWithSSF < maxDeductableAmount
-			? maxDeductionLimitWithSSF
-			: maxDeductableAmount;
+	// if totalDeduction consists of SSF
+	if (maxDeductionLimitWithSSF && ssf > 0) {
+		// defining deductionThreshold comparing maxDeductionLimitWithSSF (5 lakhs) and maxDeductableAmount (33%) whichever is lower
+		deductionThreshold =
+			maxDeductionLimitWithSSF < maxDeductableAmount
+				? maxDeductionLimitWithSSF
+				: maxDeductableAmount;
 	} else {
-		// defining deductionThreshold comparing mexDeductionLimit (3 lakhs) and maxDeducatableAmount (33%) whichever is lower
-		deductionThreshold = maxDeductionLimit < maxDeductableAmount
-			? maxDeductionLimit
-			: maxDeductableAmount;
+		// defining deductionThreshold comparing maxDeductionLimit (3 lakhs) and maxDeductableAmount (33%) whichever is lower
+		deductionThreshold =
+			maxDeductionLimit < maxDeductableAmount
+				? maxDeductionLimit
+				: maxDeductableAmount;
 	}
 	if (totalDeduction > deductionThreshold) {
 		actualDeduction = deductionThreshold;
@@ -62,7 +86,7 @@ const getTotalTaxableAmount = (
 
 	// if insurance is greater than 40,000
 	let actualInsurance = insurance;
-	if (insurance > maxInsuranceDeductionLimit) {
+	if (maxInsuranceDeductionLimit && insurance > maxInsuranceDeductionLimit) {
 		actualInsurance = maxInsuranceDeductionLimit;
 	}
 
@@ -72,14 +96,18 @@ const getTotalTaxableAmount = (
 		finalInsurance: actualInsurance,
 	};
 };
+
 /**
  * Returns the total tax with tax brackets
  *
  * @param taxRate tax rate from selected tax data
- * @param totalTaxableIncome total income (can be carry left over from last bracket)
+ * @param totalTaxableIncome total income (can be carry left over from the last bracket)
  */
 
-const getTotalTaxForRateWithIncome = (taxRate, totalTaxableIncome) => {
+const getTotalTaxForRateWithIncome = (
+	taxRate: TaxRate,
+	totalTaxableIncome: number,
+): TotalTaxForRateWithIncomeResult => {
 	const incomeTaxRateDifference = taxRate.end - taxRate.start;
 	const totalMinusDifference = totalTaxableIncome - incomeTaxRateDifference;
 	const carry = totalMinusDifference > 0 ? totalMinusDifference : 0;
@@ -89,14 +117,14 @@ const getTotalTaxForRateWithIncome = (taxRate, totalTaxableIncome) => {
 			return {
 				taxLiability: incomeTaxRateDifference * taxRate.rate,
 				taxRate: taxRate.rate,
-				assesibleIncome: incomeTaxRateDifference,
+				assessibleIncome: incomeTaxRateDifference,
 				carry,
 			};
 		}
 		return {
 			taxLiability: totalTaxableIncome * taxRate.rate,
 			taxRate: taxRate.rate,
-			assesibleIncome: totalTaxableIncome,
+			assessibleIncome: totalTaxableIncome,
 			carry,
 		};
 	}
@@ -104,23 +132,26 @@ const getTotalTaxForRateWithIncome = (taxRate, totalTaxableIncome) => {
 	return {
 		taxLiability: 0,
 		taxRate: taxRate.rate,
-		assesibleIncome: 0,
+		assessibleIncome: 0,
 		carry: carry,
 	};
 };
 
 /**
- * Returns a all tax breakdown of income.
+ * Returns all tax breakdown of income.
  * @param taxBrackets from selected tax data
  * @param totalTaxableAmount total calculated taxable amount
- * @param isSsf if totalDeduction consists of SSF
+ * @param ssf if totalDeduction consists of SSF
  */
-
-function getTotalTaxAmountWithBrackets(taxBrackets, totalTaxableAmount, isSsf) {
-	let taxBreakDownArray = [];
+function getTotalTaxAmountWithBrackets(
+	taxBrackets: TaxRate[],
+	totalTaxableAmount: number,
+	ssf: boolean,
+): TotalTaxForRateWithIncomeResult[] {
+	const taxBreakDownArray: TotalTaxForRateWithIncomeResult[] = [];
 	return taxBrackets.map((item, index) => {
 		// check if ssf has been deducted
-		if (isSsf && index === 0) {
+		if (ssf && index === 0) {
 			item.rate = 0;
 		}
 
@@ -134,12 +165,11 @@ function getTotalTaxAmountWithBrackets(taxBrackets, totalTaxableAmount, isSsf) {
 }
 
 /**
- * Returns two decimal number converted from original input float number
+ * Returns a two-decimal number converted from the original input float number
  *
  * @param amount floating number
  */
-
-const getAmountRounded = (amount) => {
+const getAmountRounded = (amount: number): number => {
 	return Math.round(amount * 100) / 100;
 };
 

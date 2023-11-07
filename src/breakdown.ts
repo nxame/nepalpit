@@ -12,11 +12,11 @@
  * This is the metadata for tax brackets in Nepal with FY fyStartDate and fyEndDateDate
  */
 
-import data from "./data.js";
+import data from './data';
 
-const breakdown = (year) => {
-	const allBrackets = data;
-	const brackets = allBrackets[year];
+// will need explicit type definition
+const breakdown = (year: string) => {
+	const brackets = data[year];
 
 	return brackets;
 };
