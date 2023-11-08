@@ -16,7 +16,7 @@ import data from './data';
 
 // will need explicit type definition
 const breakdown = (year: string) => {
-	const brackets = data[year];
+	const brackets = structuredClone(data[year]);
 
 	return brackets;
 };
