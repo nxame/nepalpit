@@ -60,7 +60,6 @@ describe('Tax Calculation', () => {
 			single: true,
 		};
 		const result = tax(options);
-		console.log(result);
 
 		expect(result.totalTaxLiability).toBe(4_800);
 		expect(result.netTaxLiabilityMonthly).toBe(400);

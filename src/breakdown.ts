@@ -13,9 +13,10 @@
  */
 
 import data, { FiscalYear } from './data';
+import cloneDeep from 'lodash.clonedeep';
 
 const breakdown = (year: string): FiscalYear => {
-	const brackets = structuredClone(data[year]);
+	const brackets = cloneDeep(data[year]);
 
 	return brackets;
 };
