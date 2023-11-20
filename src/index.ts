@@ -26,6 +26,7 @@ interface TaxParams {
 	insurance: number;
 	year: string;
 	single: boolean;
+	noOfMonths?: number;
 }
 
 interface TaxResult {
@@ -45,10 +46,26 @@ interface TaxResult {
 }
 
 const tax = (options: TaxParams): TaxResult => {
-	const { income, epf, cit, ssf, insurance, year, single } = options;
+	const {
+		income,
+		epf,
+		cit,
+		ssf,
+		insurance,
+		year,
+		single,
+		noOfMonths = 12,
+	} = options;
 
 	// Parameter validation - Check for negative values
-	if (income < 0 || epf < 0 || cit < 0 || ssf < 0 || insurance < 0) {
+	if (
+		income < 0 ||
+		epf < 0 ||
+		cit < 0 ||
+		ssf < 0 ||
+		insurance < 0 ||
+		noOfMonths < 0
+	) {
 		throw new Error(
 			'Tax parameters (Income, EPF, CIT, SSF, Insurance) cannot be negative.',
 		);
@@ -116,7 +133,7 @@ const tax = (options: TaxParams): TaxResult => {
 			totalTaxAmountWithBrackets.reduce(
 				(initialValue, value) => initialValue + value.taxLiability,
 				0,
-			) / 12,
+			) / noOfMonths,
 		),
 	};
 
