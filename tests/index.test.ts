@@ -128,4 +128,37 @@ describe('Tax Calculation', () => {
 			'Tax parameters (Income, EPF, CIT, SSF, Insurance) cannot be negative.',
 		);
 	});
+
+	it('should calculate tax for a single individual with custom number of months', () => {
+		const options = {
+			income: 6_00_000,
+			epf: 30_000,
+			cit: 20_000,
+			ssf: 10_000,
+			insurance: 5_000,
+			year: '2080/81',
+			single: true,
+			noOfMonths: 6,
+		};
+		const result = tax(options);
+
+		expect(result.totalTaxLiability).toBe(3_500);
+		expect(result.netTaxLiabilityMonthly).toBe(583.33);
+	});
+
+	it('should default to 12 months if noOfMonths is not provided', () => {
+		const options = {
+			income: 6_00_000,
+			epf: 30_000,
+			cit: 20_000,
+			ssf: 10_000,
+			insurance: 5_000,
+			year: '2080/81',
+			single: true,
+		};
+		const result = tax(options);
+
+		expect(result.totalTaxLiability).toBe(3_500);
+		expect(result.netTaxLiabilityMonthly).toBe(291.67);
+	});
 });
