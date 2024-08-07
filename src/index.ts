@@ -71,6 +71,7 @@ const tax = (options: TaxParams): TaxResult => {
 		);
 	}
 
+
 	const meta = breakdown(year);
 	console.log('Given year is', year);
 	const taxSettings = {

@@ -44,6 +44,25 @@ interface TotalTaxableAmountParams {
 	};
 }
 
+/**
+ * Returns the total taxable amount based on the provided parameters.
+ *
+ * @param {Object} params - Parameters for calculating taxable amount.
+ * @param {number} params.totalIncome - Total income before deductions.
+ * @param {number} params.epf - Employees' Provident Fund.
+ * @param {number} params.cit - Contribution to the Citizen Investment Trust.
+ * @param {number} params.ssf - Social Security Fund.
+ * @param {number} params.insurance - Insurance amount.
+ * @param {Object} params.taxSettings - Settings for tax calculation.
+ * @param {number} params.taxSettings.maxDeductionRate - Maximum deduction rate.
+ * @param {number} params.taxSettings.maxDeductionLimit - Maximum deduction limit.
+ * @param {number} params.taxSettings.maxDeductionLimitWithSSF - Maximum deduction limit considering Social Security Fund.
+ * @param {number} params.taxSettings.maxInsuranceDeductionLimit - Maximum insurance deduction limit.
+ * @returns {Object} TotalTaxableAmountResult - Object containing taxable income and deductions.
+ * @returns {number} TotalTaxableAmountResult.taxableIncome - Total taxable income.
+ * @returns {number} TotalTaxableAmountResult.sumOfSsfEpfAndCit - Sum of Employees' Provident Fund, Citizen Investment Trust, and Social Security Fund.
+ * @returns {number} TotalTaxableAmountResult.finalInsurance - Final insurance amount considered for tax calculation.
+ */
 const getTotalTaxableAmount = ({
 	totalIncome,
 	epf,
