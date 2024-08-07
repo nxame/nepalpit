@@ -18,7 +18,7 @@ interface TaxBracket {
 	rate: number;
 }
 
-interface FiscalYear {
+export interface FiscalYear {
 	fyStartDate: string;
 	fyStartDateNe: string;
 	fyEndDate: string;

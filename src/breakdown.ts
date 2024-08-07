@@ -12,12 +12,11 @@
  * This is the metadata for tax brackets in Nepal with FY fyStartDate and fyEndDateDate
  */
 
-import data from './data';
+import data, { FiscalYear } from './data';
+import cloneDeep from 'lodash.clonedeep';
 
-// will need explicit type definition
-const breakdown = (year: string) => {
-	const brackets = structuredClone(data[year]);
-
+const breakdown = (year: string): FiscalYear => {
+	const brackets = cloneDeep(data[year]);
 	return brackets;
 };
 
