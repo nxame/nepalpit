@@ -1,8 +1,6 @@
 # <abbr title="Personal Income Tax">PIT</abbr> Calculator for Nepal
 Personal Income Tax (PIT) calculator utility for Nepal
 
-⚠️  Currently being developed and not ready for use
-
 ## 🛠 How to use
 
 For browsers, download the zip file and you simply use the script tag to load bundled file.
