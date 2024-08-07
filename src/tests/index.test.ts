@@ -1,4 +1,4 @@
-import { tax } from '../src/index';
+import { tax } from '../index';
 
 describe('Tax Calculation', () => {
 	it('should calculate tax for a single individual', () => {

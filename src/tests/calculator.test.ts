@@ -1,7 +1,7 @@
 import {
 	getTotalTaxableAmount,
 	getTotalTaxAmountWithBrackets,
-} from '../src/calculator';
+} from '../calculator';
 
 describe('Get Total Taxable Amount', () => {
 	it('should correctly calculate total taxable amount when CIT, SSF, EPF, and Insurance are all 0', () => {

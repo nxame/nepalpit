@@ -6,9 +6,9 @@
  *
  *
  * MIT License
- * Copyright (c) 2020 - 2021 DanfeBooks®
+ * Copyright (c) 2020 - 2024 DanfeBooks®
  *
- * Index.js
+ * index.ts
  */
 
 import { breakdown } from './breakdown';
@@ -17,33 +17,7 @@ import {
 	getTotalTaxAmountWithBrackets,
 	getAmountRounded,
 } from './calculator';
-
-interface TaxParams {
-	income: number;
-	epf: number;
-	cit: number;
-	ssf: number;
-	insurance: number;
-	year: string;
-	single: boolean;
-	noOfMonths?: number;
-}
-
-interface TaxResult {
-	sumOfSsfEpfAndCit: number;
-	insurance: number;
-	totalIncome: number;
-	totalDeduction: number;
-	netAssessable: number;
-	totalTaxWithBrackets: {
-		assessibleIncome: number;
-		rate: number;
-		taxLiability: number;
-	}[];
-	totalAssessibleIncome: number;
-	totalTaxLiability: number;
-	netTaxLiabilityMonthly: number;
-}
+import { TaxParams, TaxResult } from './types';
 
 const tax = (options: TaxParams): TaxResult => {
 	const {
@@ -71,9 +45,8 @@ const tax = (options: TaxParams): TaxResult => {
 		);
 	}
 
-
 	const meta = breakdown(year);
-	console.log('Given year is', year);
+
 	const taxSettings = {
 		maxDeductionRate: meta.maxDeductionRate,
 		maxDeductionLimit: meta.maxDeductionLimit,
