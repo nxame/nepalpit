@@ -26,6 +26,7 @@ interface TaxParams {
 	insurance: number;
 	year: string;
 	single: boolean;
+	noOfMonths?: number;
 }
 
 interface TaxResult {
@@ -46,6 +47,7 @@ interface TaxResult {
 
 const tax = (options: TaxParams): TaxResult => {
 	const { income, epf, cit, ssf, insurance, year, single } = options;
+
 
 	const meta = breakdown(year);
 	console.log('Given year is', year);
