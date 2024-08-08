@@ -73,5 +73,11 @@
   },
   "dependencies": {
     "lodash.clonedeep": "^4.5.0"
-  }
+  },
+	"files": [
+		"lib",
+		"LICENSE",
+		"README.md",
+		"package.json"
+	]
 }
