@@ -3,14 +3,16 @@ Personal Income Tax (PIT) calculator utility for Nepal
 
 ## 🛠 How to use
 
-For browsers, download the zip file and you simply use the script tag to load bundled file.
+#### For Browsers
+Download the zip file and you simply use the script tag to load bundled file.
 ```html
 <script src="./danfebooks.pit.js"></script>
 ```
 This script tag will expose a variable called "`danfebooks`" to your global space. 
 
-For nodejs, install the package
-```
+#### For nodejs
+Install the package
+```bash
 npm i -S @danfebooks/nepalpit
 ```
 
@@ -21,7 +23,7 @@ And then, require the package
 var danfebooks = require('@danfebooks/nepalpit');
 ```
 
-You can read about **options** and **APIs** on the "Guides (in progress)" page. Please check the [example](./example) directory for code samples.
+Please check the [example](./example) directory for code samples.
 
 ### 📦 Packaged  modules
 The bundled module is an [UMD](https://github.com/umdjs/umd)  module, and this package can use this in any environments, i.e., browser or nodejs

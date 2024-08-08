@@ -114,8 +114,4 @@ const tax = (options: TaxParams): TaxResult => {
 	return result;
 };
 
-const meta = () => {
-	return 'meta work in porogress';
-};
-
-export { tax, meta };
+export { tax };

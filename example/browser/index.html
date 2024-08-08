@@ -7,7 +7,7 @@
 </head>
 <body>
 	<p>Check console output</p>
-	<script src="../danfebooks.pit.js"></script>
+	<script src="./danfebooks.pit.js"></script>
 	<script>
 		// less than 33 % and less than limit i.e 3 lakh
 		var options = {
@@ -19,8 +19,8 @@
 			insurance: 5000,
 			single: true,
 		};
-
-		console.table([danfebooks.tax(options)])
+		var results = danfebooks.tax(options);
+		console.table([results]);
 	</script>
 </body>
 </html>

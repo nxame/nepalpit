@@ -7,8 +7,10 @@ module.exports = (env) => {
 		output: {
 			filename: 'danfebooks.pit.js',
 			path: path.resolve(__dirname, env.outputPath),
-			library: 'danfebooks',
-			libraryTarget: 'umd',
+			library: {
+				name: 'danfebooks',
+				type: 'umd',
+			},
 			globalObject: 'this',
 			umdNamedDefine: true,
 		},
