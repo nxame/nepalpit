@@ -1,6 +1,8 @@
 # <abbr title="Personal Income Tax">PIT</abbr> Calculator for Nepal
 Personal Income Tax (PIT) calculator utility for Nepal
 
+[![npm version](https://badge.fury.io/js/@danfebooks%2Fnepalpit.svg)](https://badge.fury.io/js/@danfebooks%2Fnepalpit)
+
 ## 🛠 How to use
 
 #### For Browsers
@@ -13,7 +15,7 @@ This script tag will expose a variable called "`danfebooks`" to your global spac
 #### For nodejs
 Install the package
 ```bash
-npm i -S @danfebooks/nepalpit
+yarn add @danfebooks/nepalpit
 ```
 
 And then, require the package
@@ -26,7 +28,7 @@ var danfebooks = require('@danfebooks/nepalpit');
 Please check the [example](./example) directory for code samples.
 
 ### 📦 Packaged  modules
-The bundled module is an [UMD](https://github.com/umdjs/umd)  module, and this package can use this in any environments, i.e., browser or nodejs
+The bundled module is an [UMD](https://github.com/umdjs/umd)  module, and this package can use this in any environments, i.e., browser or nodejs, react
 
 ___
 
@@ -36,38 +38,34 @@ Clone the repo and install npm packages
 ```
 https://github.com/danfebooks/nepalpit.git
 cd nepalpit
-npm install
+yarn
 ```
 
 ### Project structure
 * `example` - Example use cases in browser and nodejs
-* `lib` - Compiled javascript bundle for package
+* `lib` - Compiled javascript bundle
 * `src` - All source code
-* `test` - Test cases
+* `src\test` - Test cases
 
 ### Start dev server
 
 To start the webpack build and a simple HTTP server from the example folder.
 ```
-npm start
+yarn start
 ```
 
 The `example` directory is used for the development build for seamless browser testing.
 
-Navigate to http://localhost:5000
+If you want to test nodejs, run `yarn example:node`, or a simple html usage: `yarn example:browser`
 
-### NodeJS compatibility check
+Navigate to http://localhost:3000
 
-Execute following
-```
-node example/node-example.js
-```
-The above command ensures the compiled umd bundle works with nodejs if it didn't throw an error.
 ___
-## Production
-Execute
+## Build
+
+Run
 ```
-npm run build
+yarn build
 ```
 The above command will produce a production build inside the `lib` directory to publish on npm. The `lib` directory is also the package's `main` field.
 
