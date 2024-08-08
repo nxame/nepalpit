@@ -106,10 +106,11 @@ dist
 ## source code
 src/
 example/
-tests/
 .editorconfig
 .eslintrc.json
 .gitigore
 .prettierrc
 babel.config.json
+jest.config.js
+tsconfig.json
 webpack.config.js
