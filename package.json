@@ -1,6 +1,6 @@
 {
   "name": "@danfebooks/nepalpit",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "Personal Income Tax (PIT) alculator utility for Nepal",
   "main": "./lib/danfebooks.pit.js",
   "repository": {
@@ -74,10 +74,10 @@
   "dependencies": {
     "lodash.clonedeep": "^4.5.0"
   },
-	"files": [
-		"lib",
-		"LICENSE",
-		"README.md",
-		"package.json"
-	]
+  "files": [
+    "lib",
+    "LICENSE",
+    "README.md",
+    "package.json"
+  ]
 }
