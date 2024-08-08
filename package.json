@@ -33,11 +33,14 @@
   "scripts": {
     "test": "jest",
     "clean": "rimraf ./lib/**",
-    "dev": "webpack -w --mode='development' --devtool='inline-source-map' --env outputPath='example'",
+    "dev": "webpack -w --mode='development' --devtool='inline-source-map' --env outputPath='example/react'",
     "build": "npm run test && npm run clean && webpack --progress --mode='production' --env outputPath='lib'",
     "prettify": "prettier --write ./src",
     "lint": "eslint ./src --fix",
-    "start": "concurrently 'serve example' 'npm run dev'"
+    "start": "concurrently 'serve example/react' 'npm run dev'",
+    "example:browser": "serve example/browser",
+    "example:react": "serve example/react",
+    "example:node": "node example/nodejs"
   },
   "pre-commit": [
     "prettify",
